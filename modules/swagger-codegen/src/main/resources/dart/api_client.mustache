@@ -70,6 +70,9 @@ class ApiClient {
             }
           }
       }
+    } on Error catch (e, stack) {
+      throw new FormatException(
+          'An error occurred while parsing JSON. Probably because it is a problem of SwaggerSpec, please check.\n${stack.toString()}');
     } catch (e, stack) {
       throw new ApiException.withInner(500, 'Exception during deserialization.', e, stack);
     }
